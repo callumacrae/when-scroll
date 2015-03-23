@@ -38,6 +38,8 @@ You can also use an array and pass in an element:
 
 ## Installation
 
+Take the files from the dist directory, or install through npm:
+
 ```
 $ npm install --save when-scroll
 ```
