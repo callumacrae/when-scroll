@@ -1,4 +1,4 @@
-# when-scroll
+# when-scroll [![Build Status](https://travis-ci.org/callumacrae/when-scroll.svg)](https://travis-ci.org/callumacrae/when-scroll)
 
 when-scroll is a library which will fire a callback after certain scroll
 patterns—such as scrolling below 1000px, or arriving at an element.
