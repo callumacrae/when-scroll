@@ -1,0 +1,19 @@
+{
+  "bitwise": true,
+  "curly": true,
+  "eqeqeq": true,
+  "forin": false,
+  "freeze": true,
+  "newcap": true,
+  "noarg": true,
+  "noempty": true,
+  "nonbsp": true,
+  "undef": true,
+  "unused": true,
+  "strict": true,
+
+  "browser": true,
+  "devel": true,
+  "node": true,
+  "mocha": true
+}
