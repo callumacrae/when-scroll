@@ -76,5 +76,16 @@ describe('when-scroll Parser', function () {
 			parser.isTrue(500).should.be.False;
 			parser.isTrue(600).should.be.True;
 		});
+
+		it('should work with "and"', function () {
+			var parser = new Parser('every 200px below 300px and above 550px');
+
+			parser.isTrue(100).should.be.False;
+			parser.isTrue(200).should.be.False;
+			parser.isTrue(200).should.be.False;
+			parser.isTrue(400).should.be.True;
+			parser.isTrue(500).should.be.False;
+			parser.isTrue(600).should.be.False;
+		});
 	});
 });
