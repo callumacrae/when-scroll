@@ -3,8 +3,8 @@
 var util = require('../src/util');
 
 // This definitely only works client-side
-global.window = { scrollY: 0 };
-global.document = {};
+global.window = {};
+global.document = { documentElement: { scrollTop: 0 }};
 var whenScroll = require('../src/when-scroll');
 
 describe('when-scroll main function', function () {
@@ -13,7 +13,7 @@ describe('when-scroll main function', function () {
 	before(function () {
 		util.on = function (event, el, cb) {
 			triggerScroll = function (scrollTop) {
-				global.window = { scrollY: scrollTop };
+				document.documentElement.scrollTop = scrollTop;
 				cb();
 			};
 		};
