@@ -14,27 +14,27 @@ function Truth(type, distance) {
 }
 
 Truth.prototype.isTrue = function truthIsTrue(scrollTop) {
-	return this._check(this.distance, scrollTop);
+	return this._check(scrollTop);
 };
 
 module.exports = Truth;
 
 var checks = {};
 
-checks.below = function belowCheck(distance, scrollTop) {
-	return distance <= scrollTop;
+checks.below = function belowCheck(scrollTop) {
+	return this.distance <= scrollTop;
 };
 
-checks.above = function aboveCheck(distance, scrollTop) {
-	return distance >= scrollTop;
+checks.above = function aboveCheck(scrollTop) {
+	return this.distance >= scrollTop;
 };
 
-checks.every = function everyCheck(distance, scrollTop) {
+checks.every = function everyCheck(scrollTop) {
 	if (!this._lastFiredAt) {
 		this._lastFiredAt = 0;
 	}
 
-	if (Math.abs(this._lastFiredAt - scrollTop) >= distance) {
+	if (Math.abs(this._lastFiredAt - scrollTop) >= this.distance) {
 		this._lastFiredAt = scrollTop;
 		return true;
 	} else {
