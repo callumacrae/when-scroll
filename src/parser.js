@@ -58,7 +58,7 @@ function patternToArray(scrollPattern) {
 	if (util.isArray(scrollPattern)) {
 		return util.reduce(scrollPattern, function (acc, item) {
 			if (typeof item === 'string') {
-				return acc.concat(scrollPatternToArray(item));
+				return acc.concat(patternToArray(item));
 			}
 
 			acc.push(item);
