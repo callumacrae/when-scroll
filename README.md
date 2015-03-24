@@ -35,6 +35,15 @@ whenScroll('below 1000px', function () {
 });
 ```
 
+The following will log "You've scrolled 200px" every time the user scrolls
+another 200px, but only between 500px and 1000px:
+
+```js
+whenScroll('every 200px below 500px and above 1000px', function () {
+	console.log('You\'ve scrolled 200px');
+});
+```
+
 The following will call `lazyLoad()` when the image is 200px off the bottom
 of the screen, so about to appear:
 
