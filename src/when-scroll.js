@@ -6,8 +6,8 @@ var Parser = require('./parser');
 function whenScroll(scrollPattern, cb) {
 	var handler = new Parser(scrollPattern);
 
-	util.on('scroll', document, function scrollHandler() {
-		var scrollTop = window.scrollY;
+	util.on('scroll', window, function scrollHandler() {
+		var scrollTop = document.documentElement.scrollTop;
 		if (handler.isTrue(scrollTop)) {
 			cb(scrollTop);
 		}

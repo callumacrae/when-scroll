@@ -1,24 +1,13 @@
 'use strict';
 
 var util = module.exports = {};
+var fix = require('fix-ev');
 
 util.on = function onEvent(event, element, cb) {
 	if (element.addEventListener) {
 		element.addEventListener(event, cb);
 	} else if (element.attachEvent) {
-		var newHandler = function falseEventHandler (e) {
-			e.preventDefault = function () {
-				e.returnValue = false;
-			};
-
-			e.stopPropagation = function () {
-				e.cancelBubble = true;
-			};
-
-			cb.call(element, e);
-		};
-
-		element.attachEvent('on' + event, newHandler);
+		element.attachEvent('on' + event, fix(cb));
 	}
 };
 
