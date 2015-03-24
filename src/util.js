@@ -11,13 +11,13 @@ util.on = function onEvent(event, element, cb) {
 	}
 };
 
-util.each = function (arr, cb, scope) {
+util.each = function arrayEach(arr, cb, scope) {
 	for (var i = 0; i < arr.length; i++) {
 		cb.call(scope, arr[i], i, arr);
 	}
 };
 
-util.reduce = function (arr, cb, initial) {
+util.reduce = function arrayReduce(arr, cb, initial) {
 	if (typeof initial === 'undefined') {
 		initial = arr.splice(0, 1)[0];
 	}
@@ -30,4 +30,8 @@ util.reduce = function (arr, cb, initial) {
 	});
 
 	return acc;
+};
+
+util.isArray = function isArray(obj) {
+	return Object.prototype.toString.call(obj) === '[object Array]';
 };

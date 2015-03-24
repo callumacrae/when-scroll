@@ -1,3 +1,5 @@
+/* global fakeElement */
+
 'use strict';
 
 var Truth = require('../src/truth');
@@ -46,5 +48,27 @@ describe('when-scroll Truth', function () {
 		everyTruth.isTrue(300).should.be.False;
 		everyTruth.isTrue(400).should.be.True;
 		everyTruth.isTrue(500).should.be.False;
+	});
+
+	it('should handle elements', function () {
+		window.innerHeight = 1000;
+		var el = fakeElement();
+
+		var elTruth = new Truth('within', '100px', el);
+
+		el._setTop(2000);
+		elTruth.isTrue().should.be.False;
+
+		el._setTop(1500);
+		elTruth.isTrue().should.be.False;
+
+		el._setTop(1150);
+		elTruth.isTrue().should.be.False;
+
+		el._setTop(1050);
+		elTruth.isTrue().should.be.True;
+
+		el._setTop(-100);
+		elTruth.isTrue().should.be.True;
 	});
 });

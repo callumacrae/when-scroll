@@ -6,23 +6,25 @@ var Truth = require('./truth');
 function Parser(scrollPattern) {
 	this.pattern = scrollPattern;
 
-	// Assume a string for now
-	scrollPattern = util.reduce(scrollPattern.split(' '), function (acc, word) {
-		if (word !== 'and') {
-			acc.push(word);
-		}
+	scrollPattern = patternToArray(scrollPattern);
 
-		return acc;
-	}, []);
-
-	if (scrollPattern.length % 2 === 1) {
+	if (!patternOkay(scrollPattern)) {
 		throw new Error('when-scroll error: invalid pattern');
 	}
 
 	this._truths = [];
 
 	for (var i = 0; i < scrollPattern.length; i += 2) {
-		this._truths.push(new Truth(scrollPattern[i], scrollPattern[i + 1]));
+		var el = scrollPattern[i + 2];
+		if (!el || el.nodeType !== Node.ELEMENT_NODE) {
+			el = undefined;
+		}
+
+		this._truths.push(new Truth(scrollPattern[i], scrollPattern[i + 1], el));
+
+		if (el) {
+			i++;
+		}
 	}
 
 	// If any of the Truths are multiple, the entire thing should be
@@ -51,3 +53,32 @@ Parser.prototype.isTrue = function parserIsTrue(scrollTop) {
 };
 
 module.exports = Parser;
+
+function patternToArray(scrollPattern) {
+	if (util.isArray(scrollPattern)) {
+		return util.reduce(scrollPattern, function (acc, item) {
+			if (typeof item === 'string') {
+				return acc.concat(scrollPatternToArray(item));
+			}
+
+			acc.push(item);
+			return acc;
+		}, []);
+	}
+
+	return util.reduce(scrollPattern.split(' '), function (acc, word) {
+		if (word !== 'and' && word !== 'of') {
+			acc.push(word);
+		}
+
+		return acc;
+	}, []);
+}
+
+function patternOkay(scrollPattern) {
+	if (scrollPattern.length % 2 === 0) {
+		return true;
+	}
+
+	return (scrollPattern[0] === 'within' && scrollPattern.length === 3);
+}

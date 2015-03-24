@@ -34,7 +34,6 @@ The `and` is optional, and will just be removed.
 You can also use an array and pass in an element:
 
 - `['within 100px of', el]`
-- `['every 100px below', el]`
 
 ## Installation
 

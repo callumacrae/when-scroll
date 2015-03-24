@@ -39,4 +39,13 @@ describe('utility functions', function () {
 		i.should.equal(3);
 		total.should.equal(4);
 	});
+
+	it('should detect arrays', function () {
+		util.isArray({}).should.be.False;
+		util.isArray(2).should.be.False;
+		util.isArray('test').should.be.False;
+		util.isArray(arguments).should.be.False;
+		util.isArray([1, 2, 3]).should.be.True;
+		util.isArray([]).should.be.True;
+	});
 });

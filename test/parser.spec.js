@@ -1,3 +1,5 @@
+/* global fakeElement */
+
 'use strict';
 
 var Parser = require('../src/parser');
@@ -86,6 +88,42 @@ describe('when-scroll Parser', function () {
 			parser.isTrue(400).should.be.True;
 			parser.isTrue(500).should.be.False;
 			parser.isTrue(600).should.be.False;
+		});
+
+		it('should work with "within" with an element', function () {
+			window.innerHeight = 1000;
+			var el = fakeElement();
+			var parser = new Parser(['within 100px', el])
+
+			el._setTop(2000);
+			parser.isTrue().should.be.False;
+
+			el._setTop(1500);
+			parser.isTrue().should.be.False;
+
+			el._setTop(1150);
+			parser.isTrue().should.be.False;
+
+			el._setTop(1050);
+			parser.isTrue().should.be.True;
+
+			el._setTop(1000);
+			parser.isTrue().should.be.False;
+		});
+
+		it('should work with "of"', function () {
+			window.innerHeight = 1000;
+			var el = fakeElement();
+			var parser = new Parser(['within 100px of', el])
+
+			el._setTop(2000);
+			parser.isTrue().should.be.False;
+
+			el._setTop(1050);
+			parser.isTrue().should.be.True;
+
+			el._setTop(1000);
+			parser.isTrue().should.be.False;
 		});
 	});
 });
