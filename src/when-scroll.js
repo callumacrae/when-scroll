@@ -3,15 +3,21 @@
 var util = require('./util');
 var Parser = require('./parser');
 
-function whenScroll(scrollPattern, cb) {
+function whenScroll(scrollPattern, cb, initialCheck) {
 	var handler = new Parser(scrollPattern);
 
-	util.on('scroll', window, function scrollHandler() {
+	util.on('scroll', window, scrollHandler);
+
+	if (initialCheck) {
+		scrollHandler();
+	}
+
+	function scrollHandler() {
 		var scrollTop = document.documentElement.scrollTop;
 		if (handler.isTrue(scrollTop)) {
 			cb(scrollTop);
 		}
-	});
+	}
 }
 
 window.whenScroll = module.exports = whenScroll;
