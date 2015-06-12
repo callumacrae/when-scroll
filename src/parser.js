@@ -3,6 +3,8 @@
 var util = require('./util');
 var Truth = require('./truth');
 
+var ELEMENT_NODE = window.Node ? Node.ELEMENT_NODE : 1;
+
 function Parser(scrollPattern) {
 	this.pattern = scrollPattern;
 
@@ -16,7 +18,7 @@ function Parser(scrollPattern) {
 
 	for (var i = 0; i < scrollPattern.length; i += 2) {
 		var el = scrollPattern[i + 2];
-		if (!el || el.nodeType !== Node.ELEMENT_NODE) {
+		if (!el || el.nodeType !== ELEMENT_NODE) {
 			el = undefined;
 		}
 

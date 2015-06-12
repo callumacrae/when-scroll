@@ -1,14 +1,12 @@
 'use strict';
 
-global.Node = {
-	ELEMENT_NODE: 1
-};
+global.window = {};
 
 global.fakeElement = function () {
 	var el = {};
 	var top = 2000;
 
-	el.nodeType = Node.ELEMENT_NODE;
+	el.nodeType = 1;
 	el.getBoundingClientRect = function () {
 		return { top: top };
 	};

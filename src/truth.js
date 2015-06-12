@@ -1,10 +1,12 @@
 'use strict';
 
+var ELEMENT_NODE = window.Node ? Node.ELEMENT_NODE : 1;
+
 function Truth(type, distance, el) {
 	this.type = type;
 	this.distance = parseScrollDistance(distance);
 
-	if (el && el.nodeType === Node.ELEMENT_NODE) {
+	if (el && el.nodeType === ELEMENT_NODE) {
 		this.el = el;
 	}
 
@@ -35,7 +37,8 @@ checks.above = function aboveCheck(scrollTop) {
 
 checks.within = function withinCheck() {
 	var viewportOffset = this.el.getBoundingClientRect().top;
-	return viewportOffset - window.innerHeight < this.distance;
+	var windowHeight = window.innerHeight || document.documentElement.clientHeight;
+	return viewportOffset - windowHeight < this.distance;
 };
 
 checks.every = function everyCheck(scrollTop) {
