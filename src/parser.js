@@ -30,9 +30,9 @@ function Parser(scrollPattern) {
 	}
 
 	// If any of the Truths are multiple, the entire thing should be
-	this.multiple = util.reduce(this._truths, function (acc, truth) {
-		return acc || truth.multiple;
-	}, false);
+	this.multiple = util.some(this._truths, function (truth) {
+		return truth.multiple;
+	});
 
 	this.fired = false;
 }
@@ -42,9 +42,9 @@ Parser.prototype.isTrue = function parserIsTrue(scrollTop) {
 		return false;
 	}
 
-	var isTrue = util.reduce(this._truths, function (acc, truth) {
-		return acc && truth.isTrue(scrollTop);
-	}, true);
+	var isTrue = util.every(this._truths, function (truth) {
+		return truth.isTrue(scrollTop);
+	});
 
 	if (isTrue) {
 		// YOU'RE FIRED

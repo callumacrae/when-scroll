@@ -32,6 +32,26 @@ util.reduce = function arrayReduce(arr, cb, initial) {
 	return acc;
 };
 
+util.some = function (arr, cb) {
+	for (var i = 0; i < arr.length; i++) {
+		if (cb(arr[i])) {
+			return true;
+		}
+	}
+
+	return false;
+};
+
+util.every = function (arr, cb) {
+	for (var i = 0; i < arr.length; i++) {
+		if (!cb(arr[i])) {
+			return false;
+		}
+	}
+
+	return true;
+};
+
 util.isArray = function isArray(obj) {
 	return Object.prototype.toString.call(obj) === '[object Array]';
 };

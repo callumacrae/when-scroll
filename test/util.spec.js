@@ -40,6 +40,28 @@ describe('utility functions', function () {
 		total.should.equal(4);
 	});
 
+	it('should have a .some() function', function () {
+		function moreThanFive(i) {
+			return i > 5;
+		}
+
+		util.some([], moreThanFive).should.be.False;
+		util.some([1, 4, 'test'], moreThanFive).should.be.False;
+		util.some([1, 4, 7], moreThanFive).should.be.True;
+		util.some([1, 6, 7], moreThanFive).should.be.True;
+	});
+
+	it('should have an .every() function', function () {
+		function moreThanFive(i) {
+			return i > 5;
+		}
+
+		util.every([], moreThanFive).should.be.True;
+		util.every([1, 4, 'test'], moreThanFive).should.be.False;
+		util.every([1, 4, 7], moreThanFive).should.be.False;
+		util.every([6, 7, 9], moreThanFive).should.be.True;
+	});
+
 	it('should detect arrays', function () {
 		util.isArray({}).should.be.False;
 		util.isArray(2).should.be.False;
