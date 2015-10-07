@@ -9,7 +9,7 @@ function whenScroll(scrollPattern, cb, initialCheck) {
 	util.on('scroll', window, scrollHandler);
 
 	if (initialCheck) {
-		util.on('ready', document.documentElement, scrollHandler);
+		util.on('DOMContentLoaded', document, scrollHandler);
 	}
 
 	function scrollHandler() {
