@@ -3,10 +3,8 @@
 when-scroll is a library which will fire a callback after certain scroll
 patterns—such as scrolling below 1000px, or arriving at an element.
 
-It accepts two arguments:
-
 ```
-whenScroll(scrollPattern, callback);
+whenScroll(scrollPattern, callback, [ initialCheck=false ] );
 ```
 
 The scrollPattern could be a string like one of these:
@@ -23,6 +21,11 @@ Or it can be a string like one of these:
 Or it can be an array, containing an element:
 
 - `['within 100px of', el]` (again, "of" will be removed)
+
+The optional third argument (which defaults to false) will check on page load
+whether the scroll pattern is true, instead of waiting for the user to scroll.
+This is good for something like a lazy loading library where stuff could be on
+screen initially.
 
 ## Examples
 
@@ -52,6 +55,14 @@ var img = document.querySelector('.foo');
 whenScroll(['within 100px of', img], function () {
 	lazyLoad(img);
 });
+```
+
+The following will execute straight away without the user having to scroll!
+
+```js
+whenScroll('above 1000px', function () {
+	console.log('You haven\'t even scrolled yet');
+}, true);
 ```
 
 ## Installation
