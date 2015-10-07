@@ -1,6 +1,6 @@
 {
   "name": "when-scroll",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "A library for firing callbacks on scroll patterns",
   "main": "src/when-scroll.js",
   "scripts": {
