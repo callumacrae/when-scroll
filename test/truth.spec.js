@@ -71,4 +71,22 @@ describe('when-scroll Truth', function () {
 		el._setTop(-100);
 		elTruth.isTrue().should.be.True;
 	});
+
+	it('should allow custom checks', function () {
+		Truth.checks.near = function (scrollTop) {
+			return Math.abs(this.distance - scrollTop) <= 100;
+		};
+
+		Truth.checks.notnear = function (scrollTop) {
+			return Math.abs(this.distance - scrollTop) > 100;
+		};
+
+		var nearTruth = new Truth('near', '1000px');
+		nearTruth.isTrue(800).should.be.False;
+		nearTruth.isTrue(1050).should.be.True;
+
+		var notNearTruth = new Truth('notnear', '1000px');
+		notNearTruth.isTrue(800).should.be.True;
+		notNearTruth.isTrue(1050).should.be.False;
+	});
 });
