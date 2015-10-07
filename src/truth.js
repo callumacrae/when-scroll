@@ -44,7 +44,7 @@ Truth.prototype.isTrue = function truthIsTrue(scrollTop) {
 module.exports = Truth;
 
 // These checks are called by .isTrue().
-var checks = {};
+var checks = Truth.checks = {};
 
 // "below 1000px"
 checks.below = function belowCheck(scrollTop) {
@@ -69,12 +69,13 @@ checks.every = function everyCheck(scrollTop) {
 		this._lastFiredAt = 0;
 	}
 
-	if (Math.abs(this._lastFiredAt - scrollTop) >= this.distance) {
+	var needsFiring = Math.abs(this._lastFiredAt - scrollTop) >= this.distance;
+	if (needsFiring) {
 		this._lastFiredAt = scrollTop;
 		return true;
-	} else {
-		return false;
 	}
+
+	return false;
 };
 checks.every.multiple = true;
 
