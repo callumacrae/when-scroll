@@ -24,7 +24,8 @@
     "gulp": "^3.8.11",
     "lmn-gulp-tasks": "^1.3.6",
     "mocha": "^2.2.1",
-    "should": "^5.2.0"
+    "should": "^5.2.0",
+    "sinon": "^1.17.5"
   },
   "dependencies": {
     "fix-ev": "^0.1.1"

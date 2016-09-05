@@ -1,6 +1,6 @@
 'use strict';
 
-global.window = {};
+global.window = { location: {} };
 
 global.fakeElement = function () {
 	var el = {};

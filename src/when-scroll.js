@@ -21,7 +21,11 @@ function whenScroll(scrollPattern, cb, initialCheck) {
 	util.on('scroll', window, scrollHandler);
 
 	if (initialCheck) {
-		util.on('DOMContentLoaded', document, scrollHandler);
+		if (document.readyState === 'interactive' || document.readyState === 'complete') {
+			scrollHandler();
+		} else {
+			util.on('DOMContentLoaded', document, scrollHandler);
+		}
 	}
 
 	function scrollHandler() {
