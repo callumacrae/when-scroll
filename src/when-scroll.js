@@ -20,7 +20,7 @@ function whenScroll(scrollPattern, cb, initialCheck) {
 
 	util.on('scroll', window, scrollHandler);
 
-  if (initialCheck) {
+	if (initialCheck) {
 		if (document.readyState === 'interactive' || document.readyState === 'complete') {
 			scrollHandler();
 		} else {

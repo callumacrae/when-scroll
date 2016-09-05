@@ -6,26 +6,26 @@ var util = require('../src/util');
 // This definitely only works client-side
 global.window = {};
 global.document = {
-  documentElement: { scrollTop: 0 },
-  readyState: 'loading'
+	documentElement: { scrollTop: 0 },
+	readyState: 'loading'
 };
 var whenScroll = require('../src/when-scroll');
 
 describe('when-scroll main function', function () {
 	var triggerScroll;
-  var triggerLoad;
+	var triggerLoad;
 
 	before(function () {
 		util.on = function (event, el, cb) {
-      switch (event) {
-        case 'scroll':
-          triggerScroll = function (scrollTop) {
-    				document.documentElement.scrollTop = scrollTop;
-    				cb();
-    			};
-        case 'DOMContentLoaded':
-          triggerLoad = cb;
-      }
+			switch (event) {
+				case 'scroll':
+					triggerScroll = function (scrollTop) {
+						document.documentElement.scrollTop = scrollTop;
+						cb();
+					};
+				case 'DOMContentLoaded':
+					triggerLoad = cb;
+			}
 		};
 	});
 
@@ -47,34 +47,34 @@ describe('when-scroll main function', function () {
 		triggerScroll(700);
 	});
 
-  it('should only run when a scroll event occurs', function () {
-    var cb = sinon.spy();
-    triggerScroll(400);
-    whenScroll('below 300px', cb);
-    triggerScroll(400);
-    cb.calledOnce.should.be.True;
-  });
+	it('should only run when a scroll event occurs', function () {
+		var cb = sinon.spy();
+		triggerScroll(400);
+		whenScroll('below 300px', cb);
+		triggerScroll(400);
+		cb.calledOnce.should.be.True;
+	});
 
-  it('should run once DOM is loaded if initialCheck is supplied', function () {
-    var cb = sinon.spy();
-    whenScroll('below 300px', cb, true);
-    triggerLoad();
-    cb.calledOnce.should.be.True;
-  });
+	it('should run once DOM is loaded if initialCheck is supplied', function () {
+		var cb = sinon.spy();
+		whenScroll('below 300px', cb, true);
+		triggerLoad();
+		cb.calledOnce.should.be.True;
+	});
 
-  it('should run immediatley if initialCheck is supplied and DOM readyState is interative', function () {
-    global.document.readyState = 'interactive';
-    var cb = sinon.spy();
-    triggerScroll(400);
-    whenScroll('below 300px', cb, true);
-    cb.calledOnce.should.be.True;
-  });
+	it('should run immediatley if initialCheck is supplied and DOM readyState is interative', function () {
+		global.document.readyState = 'interactive';
+		var cb = sinon.spy();
+		triggerScroll(400);
+		whenScroll('below 300px', cb, true);
+		cb.calledOnce.should.be.True;
+	});
 
-  it('should run immediatley if initialCheck is supplied and DOM readyState is complete', function () {
-    global.document.readyState = 'complete';
-    var cb = sinon.spy();
-    triggerScroll(400);
-    whenScroll('below 300px', cb, true);
-    cb.calledOnce.should.be.True;
-  });
+	it('should run immediatley if initialCheck is supplied and DOM readyState is complete', function () {
+		global.document.readyState = 'complete';
+		var cb = sinon.spy();
+		triggerScroll(400);
+		whenScroll('below 300px', cb, true);
+		cb.calledOnce.should.be.True;
+	});
 });
