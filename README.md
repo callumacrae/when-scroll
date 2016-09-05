@@ -22,7 +22,7 @@ Or it can be an array, containing an element:
 
 - `['within 100px of', el]` (again, "of" will be removed)
 
-The optional third argument (which defaults to false) will check immediately (or as soon as the page has loaded)
+The optional third argument (which defaults to false) will check immediately (or as soon as the page is ready)
 whether the scroll pattern is true, instead of waiting for the user to scroll.
 This is good for something like a lazy loading library where stuff could be on
 screen initially.
