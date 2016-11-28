@@ -1,7 +1,7 @@
 'use strict';
 
 // Polyfill for Node.ELEMENT_NODE
-var ELEMENT_NODE = window.Node ? Node.ELEMENT_NODE : 1;
+var ELEMENT_NODE = typeof window !== 'undefined' && window.Node ? Node.ELEMENT_NODE : 1;
 
 /**
  * Handles a part of a scroll pattern. Similar to the parser, but handles only

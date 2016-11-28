@@ -3,7 +3,8 @@
 var util = require('./util');
 var Truth = require('./truth');
 
-var ELEMENT_NODE = window.Node ? Node.ELEMENT_NODE : 1;
+// Polyfill for Node.ELEMENT_NODE
+var ELEMENT_NODE = typeof window !== 'undefined' && window.Node ? Node.ELEMENT_NODE : 1;
 
 /**
  * The parser that powers when-scroll. Takes a string or array containing a
