@@ -36,4 +36,8 @@ function whenScroll(scrollPattern, cb, initialCheck) {
 	}
 }
 
-window.whenScroll = module.exports = whenScroll;
+module.exports = whenScroll;
+
+if (typeof window !== 'undefined') {
+	window.whenScroll = whenScroll;
+}
